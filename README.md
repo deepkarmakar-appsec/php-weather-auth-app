@@ -4,6 +4,20 @@
 
 ---
 
+# 🌦️ PHP Weather Auth App
+
+> Secure PHP weather application with authentication, session security, server-side API proxying, and layered web security protections.
+
+<!-- 📸 MAIN DASHBOARD BANNER HERE -->
+<img width="1604" height="911" alt="login" src="https://github.com/user-attachments/assets/336f03f0-7dcd-47e7-9917-acfb9abad0a5" />
+
+
+<img width="1594" height="907" alt="register" src="https://github.com/user-attachments/assets/9c5f54b8-9aed-479f-b89e-7e8d33df5943" />
+
+<img width="1579" height="840" alt="dashboard" src="https://github.com/user-attachments/assets/075a16f3-5b02-4026-ba2a-7a5f0e47cce7" />
+
+---
+
 # 🌐 Overview
 
 PHP Weather Auth App is a secure weather dashboard application built using PHP and MySQL.
