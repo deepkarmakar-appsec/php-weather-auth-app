@@ -1,12 +1,10 @@
 # 🌦️ PHP Weather Auth App
 
-> Secure PHP weather application with authentication, session security, server-side API proxying, and layered web security protections.
+> Secure PHP weather dashboard application focused on authentication security, session protection, server-side API proxying, and secure web development practices.
 
 ---
 
-<!-- 📸 MAIN DASHBOARD BANNER HERE -->
 <img width="1604" height="911" alt="login" src="https://github.com/user-attachments/assets/336f03f0-7dcd-47e7-9917-acfb9abad0a5" />
-
 
 <img width="1594" height="907" alt="register" src="https://github.com/user-attachments/assets/9c5f54b8-9aed-479f-b89e-7e8d33df5943" />
 
@@ -16,53 +14,80 @@
 
 # 🌐 Overview
 
-PHP Weather Auth App is a secure weather dashboard application built using PHP and MySQL.
+PHP Weather Auth App is a secure weather dashboard application built using PHP and MySQL with emphasis on authentication security, secure session handling, and protected backend API communication.
 
-The application includes:
+The project explores how secure PHP applications can implement:
 
-- User authentication system
-- Real-time weather dashboard
-- Secure server-side weather API proxy
-- Session security protections
-- Secure routing and access control
+- User authentication & authorization
+- Secure session management
+- CSRF protection
+- SQL injection prevention
+- XSS mitigation
+- Secure API proxy architecture
 - Environment-based secret management
+- Protected dashboard routing
 
 ---
 
-# 🚀 Features
+# 🔥 Security Highlights
 
-## 🔐 Authentication System
+- Secure authentication system with protected dashboard routes
+- Session fixation prevention using session regeneration
+- CSRF token validation for sensitive actions
+- PDO prepared statements for SQL injection prevention
+- Secure password hashing using `password_hash()` and `password_verify()`
+- Secure backend API proxy for hiding external API keys
+- Secure session cookie configuration (`HttpOnly`, `Secure`, `SameSite`)
+- Account lockout protection against brute-force attempts
+- Output escaping to reduce XSS risks
+- Environment-based secret management using `.env`
 
-- User Registration
-- Secure Login
-- Logout Handling
-- Session-based Authentication
-- Protected Dashboard Routes
+---
+
+# 🚀 Core Features
+
+## 🔐 Authentication & Session Security
+
+- User registration & login system
+- Session-based authentication
+- Protected dashboard routes
+- Logout session cleanup
+- Session regeneration after login
+- Account lockout protection
+- Secure cookie handling
 
 ---
 
 ## 🌦️ Weather Dashboard
 
 - Real-time weather data
-- Secure backend API integration
-- Server-side weather API proxy
 - Dynamic city search
 - Responsive dashboard interface
+- Backend weather API integration
+- Secure server-side API proxy
 
 ---
 
-## 🔒 Security Features
+## 🛡️ Security Controls
 
-✅ SQL Injection Protection  
-✅ Password Hashing  
-✅ Session Fixation Prevention  
-✅ CSRF Protection  
-✅ Account Lockout Protection  
-✅ Secure Session Cookies  
-✅ XSS Protection  
-✅ DOM-based XSS Prevention  
-✅ Environment-based Secret Management  
-✅ Protected Routes  
+The application implements protections against:
+
+- SQL Injection (SQLi)
+- Cross-Site Scripting (XSS)
+- Session fixation attacks
+- CSRF attacks
+- Credential stuffing
+- Brute-force login attempts
+
+Security mechanisms include:
+
+- PDO prepared statements
+- CSRF token validation
+- Secure session cookies
+- Output escaping
+- Input validation
+- Session regeneration
+- Environment variable protection
 
 ---
 
@@ -112,7 +137,7 @@ Dashboard Access
 
 ---
 
-# 🌦️ Weather API Security Flow
+# 🌦️ API Security Flow
 
 ```text
 Frontend Request
@@ -156,80 +181,55 @@ External Weather API
 
 # 🛡️ Security Features Explained
 
-## 🔐 SQL Injection Protection
+## SQL Injection Protection
 
-Uses PDO prepared statements:
+Implemented parameterized database queries using PDO prepared statements to reduce SQL injection risks.
 
 ```php
 $stmt = $con->prepare("SELECT * FROM users WHERE email = ?");
 ```
 
-### Benefit
-
-User input never directly joins SQL queries.
-
 ---
 
-## 🔒 Password Hashing
+## Password Security
 
-Passwords secured using:
+Passwords are securely hashed and verified using PHP password hashing functions.
 
 ```php
 password_hash()
 password_verify()
 ```
 
-### Benefit
-
-Passwords never stored in plain text.
-
 ---
 
-## 🔑 Session Security
+## Session Security
 
-Secure session handling using:
+Session identifiers are regenerated after authentication to reduce session fixation risks.
 
 ```php
 session_regenerate_id(true)
 ```
 
-### Prevents
+Prevents:
 
 - Session fixation
 - Session hijacking
 
 ---
 
-## 🛡️ CSRF Protection
+## CSRF Protection
 
-CSRF tokens validated on sensitive actions.
+Sensitive requests validate CSRF tokens before processing.
 
 ```php
 hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])
 ```
 
-### Benefit
-
-Prevents unauthorized requests.
-
 ---
 
-## 🚫 Account Lockout Protection
+## Secure Session Cookies
 
-```text
-Multiple failed login attempts
-↓
-Temporary account lock
-```
-
-### Prevents
-
-- Brute-force attacks
-- Credential stuffing
-
----
-
-## 🔒 Secure Session Cookies
+Secure cookie configurations include:
 
 ```text
 HttpOnly
@@ -237,52 +237,34 @@ SameSite
 Secure
 ```
 
-### Benefits
+Benefits include:
 
-- Prevents JavaScript cookie theft
-- Reduces CSRF risk
+- Reduced JavaScript cookie access
+- Reduced CSRF exposure
 - HTTPS-only cookie transmission
 
 ---
 
-## 🛡️ XSS Protection
+## XSS Protection
 
-Output escaping using:
+User-controlled output is escaped before rendering in the browser.
 
 ```php
 htmlspecialchars()
 ```
 
-### Prevents
+Helps reduce:
 
 - Reflected XSS
 - Stored XSS
 
 ---
 
-## 🔥 DOM-based XSS Prevention
+## Environment-Based Secret Management
 
-Safe DOM updates used instead of:
+Sensitive credentials and API keys are stored using environment variables.
 
-```javascript
-innerHTML
-```
-
-### Benefit
-
-Prevents client-side script injection.
-
----
-
-## 🔐 Environment Security
-
-Sensitive secrets stored using:
-
-```text
-.env
-```
-
-### Includes
+Protected secrets include:
 
 - Database credentials
 - Weather API keys
@@ -323,33 +305,29 @@ project/
 
 # ⚙️ Tech Stack
 
-```text
-HTML5
-CSS3
-JavaScript
-PHP
-MySQL
-XAMPP
-OpenWeather API
-```
+| Technology | Usage |
+|---|---|
+| PHP | Backend |
+| MySQL | Database |
+| HTML5 | Frontend Structure |
+| CSS3 | Styling |
+| JavaScript | Frontend Interactivity |
+| XAMPP | Local Development |
+| OpenWeather API | Weather Data |
 
 ---
 
 # 🌐 API Integration
 
-## Weather API
+## OpenWeather API
 
-Uses:
+Weather data is retrieved securely through a backend API proxy.
 
-```text
-OpenWeather API
-```
-
-## Security Design
+Security design includes:
 
 - API key hidden from frontend
-- Requests handled server-side
-- Input validation applied
+- Server-side API communication
+- Input validation
 - SSL verification enabled
 
 ---
@@ -415,11 +393,11 @@ OPENWEATHER_API_KEY=YOUR_API_KEY
 
 ## Import Database
 
-Import MySQL database into XAMPP/phpMyAdmin.
+Import MySQL database using phpMyAdmin or MySQL CLI.
 
 ---
 
-## Start Server
+## Start Local Server
 
 ```text
 Apache + MySQL via XAMPP
@@ -427,54 +405,31 @@ Apache + MySQL via XAMPP
 
 ---
 
-# 🔥 Example Security Flow
-
-```text
-User Registers
-↓
-Password Hashed
-↓
-Secure Session Created
-↓
-User Logs In
-↓
-CSRF Validation
-↓
-Dashboard Access
-↓
-Weather Request Through API Proxy
-↓
-Secure Response Returned
-```
-
----
-
 # 🧠 Security Concepts Implemented
 
-```text
-Authentication
-Authorization
-CSRF Protection
-Session Security
-SQL Injection Prevention
-XSS Protection
-API Proxy Security
-Environment Security
-Brute-force Protection
-Secure Cookies
-```
+- Authentication
+- Authorization
+- Session Security
+- CSRF Protection
+- SQL Injection Prevention
+- XSS Mitigation
+- API Proxy Security
+- Environment Security
+- Secure Cookie Handling
+- Brute-force Protection
 
 ---
 
 # 🤝 Contribution
 
-Pull requests are welcome.
+Pull requests and improvements are welcome.
 
-Feel free to improve:
-- Security
-- Performance
-- UI/UX
-- API integrations
+Areas for improvement include:
+
+- Security enhancements
+- Performance optimization
+- UI/UX improvements
+- Additional API integrations
 
 ---
 
@@ -483,16 +438,10 @@ Feel free to improve:
 ## Deep Karmakar
 
 Security-focused Developer  
-DevSecOps + Cloud Security Enthusiast
+Application Security • DevSecOps • Cloud Security
 
 ---
 
-# 🔥 Final Summary
+# 📌 Final Summary
 
-A secure PHP weather application implementing authentication hardening, session security, API proxy protection, SQL injection prevention, XSS defenses, and secure environment-based configuration.
-
----
-
-# 🚀 Final One Line
-
-A secure PHP weather dashboard application built with layered authentication, session protection, API security, and modern web security practices.
+A secure PHP weather dashboard application implementing authentication hardening, secure session handling, protected API communication, SQL injection prevention, XSS mitigation, and environment-based secret management.
