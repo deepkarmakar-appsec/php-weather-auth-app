@@ -393,7 +393,7 @@ Protected Route Access
 ## Clone Repository
 
 ```bash
-git clone YOUR_REPOSITORY_URL
+git clone https://github.com/deepkarmakar-appsec/php-weather-auth-app.git
 ```
 
 ---
